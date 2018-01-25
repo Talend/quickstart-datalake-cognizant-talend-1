@@ -328,6 +328,16 @@
             "Description": "The S3 key name prefix used to simulate a folder for your copy of Quick Start assets, if you decide to customize or extend the Quick Start for your own use. This prefix can include numbers, lowercase letters, uppercase letters, hyphens, and forward slashes",
             "Type": "String"
         },
+        "TalendVersion": {
+            "Description": "Talend Product Version",
+            "Type": "String",
+            "Default": "6.3.1",
+            "AllowedValues": [
+                "6.3.1",
+                "6.4.1"
+            ],
+            "ConstraintDescription": "must be a valid Talend product version."
+        },
         "TalendLicenseBucket": {
             "Description": "Bucket holding Talend license",
             "Type": "String",
@@ -916,6 +926,7 @@
             "Properties": {
                 "TemplateURL": { "Fn::Sub": "http://${QSS3BucketName}.s3.amazonaws.com/${QSS3KeyPrefix}templates/oodle.template" },
                 "Parameters": {
+                    "TalendVersion": { "Ref": "TalendVersion" },
                     "QSS3BucketName": { "Ref": "QSS3BucketName" },
                     "QSS3KeyPrefix": { "Ref": "QSS3KeyPrefix" },
                     "KeyPairName": { "Ref": "KeyPairName" },

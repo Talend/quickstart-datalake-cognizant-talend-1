@@ -327,6 +327,16 @@
             "Description": "The S3 key name prefix used to simulate a folder for your copy of Quick Start assets, if you decide to customize or extend the Quick Start for your own use. This prefix can include numbers, lowercase letters, uppercase letters, hyphens, and forward slashes",
             "Type": "String"
         },
+        "TalendVersion": {
+            "Description": "Talend Product Version",
+            "Type": "String",
+            "Default": "6.3.1",
+            "AllowedValues": [
+                "6.3.1",
+                "6.4.1"
+            ],
+            "ConstraintDescription": "must be a valid Talend product version."
+        },
         "KeyPairName": {
             "Description": "Public/private key pair, which allows you to connect securely to your instance after it launches. When you created an AWS account, this is the key pair you created in your preferred region.",
             "Type": "AWS::EC2::KeyPair::KeyName"
@@ -1088,6 +1098,7 @@
 			"Properties" : {
                 "TemplateURL": { "Fn::Sub": "http://${QSS3BucketName}.s3.amazonaws.com/${QSS3KeyPrefix}modules/talend/templates/talend-studio-ubuntu.template" },
 				"Parameters" : {
+                    "TalendVersion": { "Ref": "TalendVersion" },
                     "QSS3BucketName": { "Ref": "QSS3BucketName" },
                     "QSS3KeyPrefix": { "Fn::Sub": "${QSS3KeyPrefix}modules/talend/" },
 					"TalendLicenseBucket":  { "Ref": "TalendLicenseBucket" },
@@ -1154,6 +1165,7 @@
                 "TemplateURL": { "Fn::Sub": "http://${QSS3BucketName}.s3.amazonaws.com/${QSS3KeyPrefix}modules/talend/templates/talend-servers.template" },
 				"TimeoutInMinutes" : "10",
 				"Parameters" : {
+                    "TalendVersion": { "Ref": "TalendVersion" },
                     "QSS3BucketName": { "Ref": "QSS3BucketName" },
                     "QSS3KeyPrefix": { "Fn::Sub": "${QSS3KeyPrefix}modules/talend/" },
                     "KeyName": { "Ref": "KeyPairName" },
