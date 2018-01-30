@@ -55,9 +55,7 @@
                     },
                     "Parameters": [
                         "JobserverAutoscaleDesiredCapacity",
-                        "JobserverAutoscaleMaxSize",
-                        "DistantRunAutoscaleDesiredCapacity",
-                        "DistantRunAutoscaleMaxSize"
+                        "DistantRunAutoscaleDesiredCapacity"
                     ]
                 },
                 {
@@ -240,14 +238,8 @@
                 "JobserverAutoscaleDesiredCapacity": {
                     "default": "Jobserver Autoscale Desired Capacity"
                 },
-                "JobserverAutoscaleMaxSize": {
-                    "default": "Jobserver Autoscale Maximum Capacity"
-                },
                 "DistantRunAutoscaleDesiredCapacity": {
                     "default": "DistantRun Autoscale Desired Capacity"
-                },
-                "DistantRunAutoscaleMaxSize": {
-                    "default": "DistantRun Autoscale Maximum Capacity"
                 },
                 "NumBastionHosts": {
                     "default": "Number of Bastion Hosts"
@@ -313,44 +305,9 @@
         }
     },
     "Parameters": {
-        "QSS3BucketName": {
-            "AllowedPattern": "^[0-9a-zA-Z]+([0-9a-zA-Z-.]*[0-9a-zA-Z])*$",
-            "ConstraintDescription": "Quick Start bucket name can include numbers, lowercase letters, uppercase letters, periods (.), and hyphens (-). It cannot start or end with a hyphen (-) or period (.).",
-            "Default": "quickstart-reference",
-            "Description": "S3 bucket name for the Quick Start assets. Quick Start bucket name can include numbers, lowercase letters, uppercase letters, periods (.), and hyphens (-). It cannot start or end with a hyphen (-) or period (.).",
-            "Type": "String"
-        },
-        "QSS3KeyPrefix": {
-            "AllowedPattern": "^[0-9a-zA-Z-/]*$",
-            "ConstraintDescription": "Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/).  Prefix cannot start with a slash but must end with a slash unless it is the empty string.",
-            "Default": "datalake/cognizant/talend/latest/",
-            "Description": "The S3 key name prefix used to simulate a folder for your copy of Quick Start assets, if you decide to customize or extend the Quick Start for your own use. This prefix can include numbers, lowercase letters, uppercase letters, hyphens, and forward slashes",
-            "Type": "String"
-        },
-        "TalendVersion": {
-            "Description": "Talend Product Version",
-            "Type": "String",
-            "Default": "6.3.1",
-            "AllowedValues": [
-                "6.3.1",
-                "6.4.1"
-            ],
-            "ConstraintDescription": "must be a valid Talend product version."
-        },
         "KeyPairName": {
             "Description": "Public/private key pair, which allows you to connect securely to your instance after it launches. When you created an AWS account, this is the key pair you created in your preferred region.",
             "Type": "AWS::EC2::KeyPair::KeyName"
-        },
-        "TalendLicenseBucket": {
-            "Description": "Bucket where the Talend license is stored",
-            "Type": "String",
-            "AllowedPattern": "^[0-9a-zA-Z]+([0-9a-zA-Z-.]*[0-9a-zA-Z])*$",
-            "ConstraintDescription": "Quick Start bucket name can include numbers, lowercase letters, uppercase letters, periods (.), and hyphens (-). It cannot start or end with a hyphen (-) or period (.)."
-        },
-        "TalendResourceBucket": {
-            "Description": "Bucket where the Talend binaries are stored",
-            "Type": "String",
-            "Default": "repo-quickstart-talend"
         },
         "VpcId": {
             "Description": "ID of the existing VPC where the AWS resources will be deployed through the CloudFormation templates",
@@ -377,6 +334,41 @@
             "ConstraintDescription": "CIDR block parameter must be in the form x.x.x.x/x",
             "Description": "The CIDR IP range that is permitted to access the VPC. We recommend that you use a constrained CIDR range to reduce the potential of inbound attacks from unknown IP addresses. For example, if your IPv4 address is 203.0.113.25, specify 203.0.113.25/32 to list this single IPv4 address in CIDR notation. If your company allocates addresses from a range, specify the entire range, such as 203.0.113.0/24. For details, see VPCs and Subnets in the AWS documentation.",
             "Type": "String"
+        },
+        "QSS3BucketName": {
+            "AllowedPattern": "^[0-9a-zA-Z]+([0-9a-zA-Z-.]*[0-9a-zA-Z])*$",
+            "ConstraintDescription": "Quick Start bucket name can include numbers, lowercase letters, uppercase letters, periods (.), and hyphens (-). It cannot start or end with a hyphen (-) or period (.).",
+            "Default": "quickstart-reference",
+            "Description": "S3 bucket name for the Quick Start assets. Quick Start bucket name can include numbers, lowercase letters, uppercase letters, periods (.), and hyphens (-). It cannot start or end with a hyphen (-) or period (.).",
+            "Type": "String"
+        },
+        "QSS3KeyPrefix": {
+            "AllowedPattern": "^[0-9a-zA-Z-/]*$",
+            "ConstraintDescription": "Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/).  Prefix cannot start with a slash but must end with a slash unless it is the empty string.",
+            "Default": "datalake/cognizant/talend/latest/",
+            "Description": "The S3 key name prefix used to simulate a folder for your copy of Quick Start assets, if you decide to customize or extend the Quick Start for your own use. This prefix can include numbers, lowercase letters, uppercase letters, hyphens, and forward slashes",
+            "Type": "String"
+        },
+        "TalendVersion": {
+            "Description": "Talend Product Version",
+            "Type": "String",
+            "Default": "6.3.1",
+            "AllowedValues": [
+                "6.3.1",
+                "6.4.1"
+            ],
+            "ConstraintDescription": "must be a valid Talend product version."
+        },
+        "TalendLicenseBucket": {
+            "Description": "Bucket where the Talend license is stored",
+            "Type": "String",
+            "AllowedPattern": "^[0-9a-zA-Z]+([0-9a-zA-Z-.]*[0-9a-zA-Z])*$",
+            "ConstraintDescription": "Quick Start bucket name can include numbers, lowercase letters, uppercase letters, periods (.), and hyphens (-). It cannot start or end with a hyphen (-) or period (.)."
+        },
+        "TalendResourceBucket": {
+            "Description": "Bucket where the Talend binaries are stored",
+            "Type": "String",
+            "Default": "repo-quickstart-talend"
         },
         "TacInstanceType": {
             "Description": "EC2 instance type for the Talend Administration Center",
@@ -675,7 +667,7 @@
             "Default": "tadmin"
         },
         "RedshiftPassword": {
-            "Description": "Password for Redshift. Can only contain alphanumeric characters or the following special characters!^*-_+",
+            "Description": "Password for Redshift must be at least 8 to 64 characters long with at least one number, one lowercase character,and one uppercase character. Can only contain alphanumeric characters or the following special characters!^*-_+",
             "NoEcho": true,
             "Type": "String",
 			"MinLength": 8,
@@ -703,13 +695,6 @@
             "Description": "The number of nodes in the redshift cluster.",
             "Type": "Number",
             "Default": "1"
-        },
-        "JobserverAutoscaleMaxSize": {
-            "Description": "Maximum no. of EC2 instances for Talend Jobserver autoscale group ",
-            "Type": "Number",
-            "MinValue": "1",
-            "MaxValue": "10",
-            "Default": "5"
         },
 		"EmrMasterInstanceType": {
             "AllowedValues": [
@@ -790,13 +775,6 @@
             "MinValue": "1",
             "MaxValue": "10",
             "Default": "1"
-        },
-        "DistantRunAutoscaleMaxSize": {
-            "Description": "Maximum no. of EC2 instances for Talend DistantRun Autoscale group",
-            "Type": "Number",
-            "MinValue": "1",
-            "MaxValue": "10",
-            "Default": "5"
         },
         "DistantRunAutoscaleDesiredCapacity": {
             "Description": "Desired number of EC2 instances for Talend DistantRun Autoscale group",
@@ -1184,11 +1162,7 @@
 
                     "CreateDistantRunStack": { "Ref": "CreateDistantRunStack" },
 
-                    "JobserverAutoscaleMinSize": "1",
-                    "JobserverAutoscaleMaxSize": { "Ref": "JobserverAutoscaleMaxSize" },
                     "JobserverAutoscaleDesiredCapacity": {  "Ref": "JobserverAutoscaleDesiredCapacity" },
-                    "DistantRunAutoscaleMinSize": "1",
-                    "DistantRunAutoscaleMaxSize": { "Ref": "DistantRunAutoscaleMaxSize" },
                     "DistantRunAutoscaleDesiredCapacity": {  "Ref": "DistantRunAutoscaleDesiredCapacity" },
 
                     "TacInstanceType": { "Ref": "TacInstanceType" },
