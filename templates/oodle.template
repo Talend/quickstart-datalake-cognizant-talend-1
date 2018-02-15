@@ -80,6 +80,7 @@
                         "TacDbSchema",
                         "TacUsername",
                         "TacPassword",
+                        "TacUserType",
                         "TacDbUser",
                         "TacDbPassword",
                         "DbClass",
@@ -201,6 +202,9 @@
                 },
                 "TacPassword": {
                     "default": "TAC Password"
+                },
+                "TacUserType": {
+                    "default": "TAC User Type"
                 },
                 "MasterDbUser": {
                     "default": "TAC Master Database User"
@@ -594,6 +598,12 @@
             "Description": "TAC application password for tadmin account.",
             "Type": "String",
             "NoEcho": "true"
+        },
+        "TacUserType": {
+            "Description": "User Type for TAC accounts.  Accept DI default unless using your own commercial license.",
+            "Type": "String",
+            "AllowedValues": [ "DI", "DQ", "MDM" ],
+            "Default": "DI"
         },
         "MasterDbUser": {
             "Description": "The master or root user used to create TAC and AMC databases and the TAC user.  Only needed if creating the TAC or AMC databases",
@@ -1190,6 +1200,7 @@
                         ]
                     },
                     "TacPassword": { "Ref": "TacPassword" },
+                    "TacUserType": { "Ref": "TacUserType" },
                     "MasterDbUser": { "Ref": "MasterDbUser" },
                     "MasterDbPassword": { "Ref": "MasterDbPassword" },
                     "TacDbSchema": { "Ref": "TacDbSchema" },
