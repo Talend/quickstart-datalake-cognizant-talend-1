@@ -789,7 +789,7 @@
             "Default": "http"
         },
         "GitHost": {
-            "Description": "Host name of Git",
+            "Description": "Host name or IP address of existing Git server; leave blank to create a new Git server",
             "Type": "String",
             "Default": ""
         },
