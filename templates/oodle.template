@@ -105,10 +105,7 @@
                         "default": "Talend Git configuration"
                     },
                     "Parameters": [
-                        "GitProtocol",
-                        "GitHost",
-                        "GitPort",
-                        "GitRepo",
+                        "GitUrl",
                         "GitAdminUserid",
                         "GitAdminPassword",
                         "GitAdminEmail",
@@ -275,17 +272,8 @@
                 "RedshiftPassword": {
                     "default": "Amazon Redshift Password"
                 },
-                "GitProtocol": {
-                    "default": "Git Protocol"
-                },
-                "GitHost": {
-                    "default": "Git Host (optional)"
-                },
-                "GitPort": {
-                    "default": "Git TCP Port"
-                },
-                "GitRepo": {
-                    "default": "Git Repository"
+                "GitUrl": {
+                    "default": "Git Repository Url (optional)"
                 },
                 "GitAdminUserid": {
                     "default": "Git Admin User ID"
@@ -793,27 +781,10 @@
             "MaxValue": "10",
             "Default": "1"
         },
-        "GitProtocol": {
-            "Description": "Git protocol",
-            "Type": "String",
-            "Default": "http"
-        },
-        "GitHost": {
-            "Description": "Host name of Git",
+        "GitUrl": {
+            "Description": "Git repository url, leave this blank to create a new GitLab instance",
             "Type": "String",
             "Default": ""
-        },
-        "GitPort": {
-            "Description": "Port number of GIT",
-            "Type": "Number",
-            "MinValue": "1",
-            "MaxValue": "65535",
-            "Default": "443"
-        },
-        "GitRepo": {
-            "Description": "Name of Git repository.",
-            "Type": "String",
-            "Default": "oodlejobs"
         },
         "GitAdminUserid": {
             "Description": "Unique user id of Git administrator, must be different than GitTacUserid",
@@ -892,7 +863,7 @@
             "Fn::Equals": [ "true", { "Ref": "CreateEmr" } ]
         },
         "CreateGitCondition": {
-            "Fn::Equals": [ "", { "Ref": "GitHost" } ]
+            "Fn::Equals": [ "", { "Ref": "GitUrl" } ]
         },
         "CreateStudioCondition": {
             "Fn::Equals": [
@@ -1211,10 +1182,7 @@
                     "CreateTacDatabase": { "Ref": "CreateTacDatabase" },
                     "CreateAmcDatabase": { "Ref": "CreateTacDatabase" },
 
-                    "GitHost": { "Ref": "GitHost" },
-                    "GitProtocol": { "Ref": "GitProtocol" },
-                    "GitPort": { "Ref": "GitPort" },
-                    "GitRepo": { "Ref": "GitRepo" },
+                    "GitUrl": { "Ref": "GitUrl" },
                     "GitAdminUserid": { "Ref": "GitAdminUserid" },
                     "GitAdminPassword": { "Ref": "GitAdminPassword" },
                     "GitAdminEmail": { "Ref": "GitAdminEmail" },
@@ -1281,16 +1249,13 @@
                     "TacUsername": { "Ref": "TacDbUser" },
                     "TacPassword": { "Ref": "TacDbPassword" },
 
-                    "GitProtocol": { "Ref": "GitProtocol" },
-                    "GitHost": {
+                    "GitUrl": {
                         "Fn::If": [
                             "CreateGitCondition",
-                            { "Fn::GetAtt": [ "TalendServersStack", "Outputs.GitDnsName" ] },
-                            { "Ref": "GitHost" } 
+                            { "Fn::GetAtt": [ "TalendServersStack", "Outputs.GitUrl" ] },
+                            { "Ref": "GitUrl" } 
                         ]
                     },
-                    "GitPort": { "Ref": "GitPort" },
-                    "GitRepo": { "Ref": "GitRepo" },
                     "GitAdminEmail": { "Ref": "GitAdminEmail" },
                     "GitAdminUserid": { "Ref": "GitAdminUserid" },
                     "GitAdminPassword": { "Ref": "GitAdminPassword" },
@@ -1395,17 +1360,17 @@
 				"Name": { "Fn::Sub": "${AWS::StackName}:NexusPublicDnsName" } 
 			}
         },
-        "GitPublicDnsName": {
-            "Value": { 
+        "GitUrl": {
+            "Value": {
                 "Fn::If": [
                     "CreateGitCondition",
-                    { "Fn::GetAtt": [ "TalendServersStack", "Outputs.GitDnsName" ] },
-                    { "Ref": "GitHost" } 
+                    { "Fn::GetAtt": [ "TalendServersStack", "Outputs.GitUrl" ] },
+                    { "Ref": "GitUrl" } 
                 ]
             },
-            "Description": "Git public DNS address",
+            "Description": "Git repository url",
 			"Export": {
-				"Name": { "Fn::Sub": "${AWS::StackName}:GitPublicDnsName" } 
+				"Name": { "Fn::Sub": "${AWS::StackName}:GitUrl" } 
 			}
         },
         "StudioPublicDnsName": {
