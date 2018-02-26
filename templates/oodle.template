@@ -1141,7 +1141,7 @@
 			"Type" : "AWS::CloudFormation::Stack",
 			"Properties" : {
                 "TemplateURL": { "Fn::Sub": "http://${QSS3BucketName}.s3.amazonaws.com/${QSS3KeyPrefix}modules/talend/templates/talend-servers.template" },
-				"TimeoutInMinutes" : "10",
+				"TimeoutInMinutes" : "60",
 				"Parameters" : {
                     "TalendVersion": { "Ref": "TalendVersion" },
                     "QSS3BucketName": { "Ref": "QSS3BucketName" },
