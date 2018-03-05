@@ -122,7 +122,8 @@
                     },
                     "Parameters": [
                         "QSS3BucketName",
-                        "QSS3KeyPrefix"
+                        "QSS3KeyPrefix",
+                        "TalendVersion"
                     ]
                 }
             ],
@@ -132,6 +133,9 @@
                 },
                 "QSS3KeyPrefix": {
                     "default": "Quick Start S3 Key Prefix"
+                },
+                "TalendVersion": {
+                    "default": "Talend Version"
                 },
                 "TalendResourceBucket": {
                     "default": "Talend Resource Bucket"
