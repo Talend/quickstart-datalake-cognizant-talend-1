@@ -1159,7 +1159,7 @@
                     "PublicSubnetId2": { "Ref": "PublicSubnetId2" },
                     "PrivateSubnetId1": { "Ref": "PrivateSubnetId1" },
                     "PrivateSubnetId2": { "Ref": "PrivateSubnetId2" },
-
+                    "VPCID": { "Ref": "VpcId" },
                     "CreateDistantRunStack": { "Ref": "CreateDistantRunStack" },
 
                     "JobserverAutoscaleDesiredCapacity": {  "Ref": "JobserverAutoscaleDesiredCapacity" },
@@ -1370,31 +1370,11 @@
 				"Name": { "Fn::Sub": "${AWS::StackName}:TalendServersStack" } 
 				} 
         },
-        "TacPublicDnsName": {
-            "Value": { "Fn::GetAtt": [ "TalendServersStack", "Outputs.TacDnsName"] },
-            "Description": "TAC public DNS",
+        "ELBDnsName": {
+            "Value": { "Fn::GetAtt": [ "TalendServersStack", "Outputs.ELBDnsName"] },
+            "Description": "ELB public DNS",
 			"Export": {
-				"Name": { "Fn::Sub": "${AWS::StackName}:TacPublicDnsName" } 
-			}
-        },
-        "NexusPublicDnsName": {
-            "Value": { "Fn::GetAtt": [ "TalendServersStack", "Outputs.NexusDnsName"] },
-            "Description": "Nexus public DNS address",
-			"Export": {
-				"Name": { "Fn::Sub": "${AWS::StackName}:NexusPublicDnsName" } 
-			}
-        },
-        "GitPublicDnsName": {
-            "Value": { 
-                "Fn::If": [
-                    "CreateGitCondition",
-                    { "Fn::GetAtt": [ "TalendServersStack", "Outputs.GitDnsName" ] },
-                    { "Ref": "GitHost" } 
-                ]
-            },
-            "Description": "Git public DNS address",
-			"Export": {
-				"Name": { "Fn::Sub": "${AWS::StackName}:GitPublicDnsName" } 
+				"Name": { "Fn::Sub": "${AWS::StackName}:ELBDnsName" } 
 			}
         },
         "StudioPublicDnsName": {

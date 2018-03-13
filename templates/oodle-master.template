@@ -993,31 +993,11 @@
 				"Name": { "Fn::Sub": "${AWS::StackName}:OodleStack" } 
 				} 
         },
-        "GitPublicDnsName": {
-            "Value": { 
-                "Fn::If": [
-                    "CreateGitCondition",
-                    { "Fn::GetAtt": [ "OodleStack", "Outputs.GitPublicDnsName" ] },
-                    { "Ref": "GitHost" } 
-                ]
-            },
-            "Description": "Git DNS",
+        "ELBDnsName": {
+            "Value": { "Fn::GetAtt": [ "OodleStack", "Outputs.ELBDnsName"] },
+            "Description": "ELB public DNS",
 			"Export": {
-				"Name": { "Fn::Sub": "${AWS::StackName}:GitPublicDnsName" } 
-			}
-        },		
-        "TacPublicDnsName": {
-            "Value": { "Fn::GetAtt": [ "OodleStack", "Outputs.TacPublicDnsName"] },
-            "Description": "TAC public DNS",
-			"Export": {
-				"Name": { "Fn::Sub": "${AWS::StackName}:TacPublicDnsName" } 
-			}
-        },
-        "NexusPublicDnsName": {
-            "Value": { "Fn::GetAtt": [ "OodleStack", "Outputs.NexusPublicDnsName"] },
-            "Description": "Nexus public DNS",
-			"Export": {
-				"Name": { "Fn::Sub": "${AWS::StackName}:NexusPublicDnsName" } 
+				"Name": { "Fn::Sub": "${AWS::StackName}:ELBPublicDnsName" } 
 			}
         },	
         "StudioPublicDnsName": {
