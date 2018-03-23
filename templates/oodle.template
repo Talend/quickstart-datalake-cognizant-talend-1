@@ -1147,7 +1147,7 @@
                     "QSS3BucketName": { "Ref": "QSS3BucketName" },
                     "QSS3KeyPrefix": { "Fn::Sub": "${QSS3KeyPrefix}modules/talend/" },
                     "KeyName": { "Ref": "KeyPairName" },
-
+					"VpcId": {"Ref": "VpcId"},
 					"TalendLicenseBucket":  { "Ref": "TalendLicenseBucket" },
                     "TalendResourceBucket": { "Ref": "TalendResourceBucket" },
                     "TalendSourceBucket": { "Fn::GetAtt": [ "BucketsStack", "Outputs.TalendSourceBucket" ] },
@@ -1159,7 +1159,6 @@
                     "PublicSubnetId2": { "Ref": "PublicSubnetId2" },
                     "PrivateSubnetId1": { "Ref": "PrivateSubnetId1" },
                     "PrivateSubnetId2": { "Ref": "PrivateSubnetId2" },
-                    "VPCID": { "Ref": "VpcId" },
                     "CreateDistantRunStack": { "Ref": "CreateDistantRunStack" },
 
                     "JobserverAutoscaleDesiredCapacity": {  "Ref": "JobserverAutoscaleDesiredCapacity" },
