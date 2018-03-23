@@ -944,6 +944,7 @@
                     "JobserverAutoscaleDesiredCapacity": { "Ref": "JobserverAutoscaleDesiredCapacity" },
                     "DistantRunAutoscaleDesiredCapacity": { "Ref": "DistantRunAutoscaleDesiredCapacity" },
 
+                    "GitUrl": { "Ref": "GitUrl" },
                     "GitAdminUserid": { "Ref": "GitAdminUserid" },
                     "GitAdminPassword": { "Ref": "GitAdminPassword" },
                     "GitAdminEmail": { "Ref": "GitAdminEmail" },
